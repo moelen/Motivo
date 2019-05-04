@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Nieuwe Todo Lijst</h1>
+    <h1>Nieuw item toevoegen aan {{ request('todoList')->name }}</h1>
 
     @foreach($errors->all() as $error)
         <div class="alert alert-danger">{{ $error }}</div>

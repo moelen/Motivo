@@ -4,6 +4,7 @@ namespace App\Entities\Todolists;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class TodoList
@@ -24,5 +25,11 @@ class TodoList extends Model
      */
     protected $table = 'todo_lists';
 
-
+    /**
+     * @return HasMany
+     */
+    public function items(): HasMany
+    {
+        return $this->hasMany(Item::class);
+    }
 }

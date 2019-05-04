@@ -29,6 +29,6 @@ class TodolistItemController extends Controller
     {
         $this->dispatchNow(new StoreItemJob($request, $todoList));
 
-        return redirect()->route('todolist.item.create', $todoList);
+        return redirect()->route('todolist.show', $todoList);
     }
 }

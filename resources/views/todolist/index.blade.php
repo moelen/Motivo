@@ -13,10 +13,27 @@
         </thead>
         <tbody>
             @foreach($todolists as $list)
-                <tr>
+                <tr data-link="{{ route('todolist.show', ['todoList' => $list ]) }}">
                     <td>{{ $list->name }}</td>
                 </tr>
             @endforeach
         </tbody>
     </table>
 @endsection
+
+@push('js')
+    <script>
+        $(function() {
+            /**
+             * Listener for redirect on click table row.
+             */
+            $('body').on('click', '.table tr', function () {
+                var url = $(this).data('link');
+
+                if (url != undefined) {
+                    window.location = url;
+                }
+            });
+        });
+    </script>
+@endpush

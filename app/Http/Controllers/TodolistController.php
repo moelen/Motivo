@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Todolists\TodoList;
 use App\Http\Requests\Todolist\StoreTodolistRequest;
 use App\Jobs\Todolists\LoadTodolistsJob;
 use App\Jobs\Todolists\StoreTodolistJob;
@@ -19,6 +20,15 @@ class TodolistController extends Controller
         $todolists = $this->dispatchNow(new LoadTodolistsJob());
 
         return view('todolist.index', compact('todolists'));
+    }
+
+    /**
+     * @param TodoList $todolist
+     * @return View
+     */
+    public function show(TodoList $todolist): View
+    {
+        return view('todolist.show', compact('todolist'));
     }
 
     /**

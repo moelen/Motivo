@@ -3,13 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Todolist\StoreTodolistRequest;
-use App\Jobs\StoreTodolistJob;
+use App\Jobs\Todolists\LoadTodolistsJob;
+use App\Jobs\Todolists\StoreTodolistJob;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class TodolistController extends Controller
 {
+
+    /**
+     * @return View
+     */
+    public function index(): View
+    {
+        $todolists = $this->dispatchNow(new LoadTodolistsJob());
+
+        return view('todolist.index', compact('todolists'));
+    }
 
     /**
      * @return View
@@ -27,6 +37,6 @@ class TodolistController extends Controller
     {
         $this->dispatchNow(new StoreTodolistJob($request));
 
-        return redirect()->route('todolist.create');
+        return redirect()->route('todolist.index');
     }
 }

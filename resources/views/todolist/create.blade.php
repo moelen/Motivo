@@ -13,7 +13,7 @@
 
         <div class="form-group">
             <label for="name">Naam</label>
-            <input type="text" id="name" class="form-control" name="name" value="@php old('name', '') @endphp" placeholder="Naam...">
+            <input type="text" id="name" class="form-control" name="name" value="{{ old('name', '') }}" placeholder="Naam...">
         </div>
 
         <button class="btn btn-primary">Opslaan</button>

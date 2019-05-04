@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Entities\Todolists\TodoList;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -23,9 +24,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
-
         parent::boot();
+
+        $this->bindModels();
     }
 
     /**
@@ -69,5 +70,13 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
+    }
+
+    /**
+     * Bind the models to the route.
+     */
+    private function bindModels()
+    {
+        Route::model('todoList', TodoList::class);
     }
 }

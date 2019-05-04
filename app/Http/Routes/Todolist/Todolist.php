@@ -1,6 +1,12 @@
 <?php
 
 Route::group(['prefix' => 'todolist', 'as' => 'todolist.'], function () {
+
+    Route::get('/', [
+        'as'   => 'index',
+        'uses' => 'TodolistController@index'
+    ]);
+
     Route::get('create', [
         'as'   => 'create',
         'uses' => 'TodolistController@create'

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace App\Jobs\Todolists;
 
 use App\Entities\Todolists\TodoList;
 use App\Http\Requests\Todolist\StoreTodolistRequest;

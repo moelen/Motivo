@@ -11,7 +11,8 @@
     <table class="table table-striped table-hover" id="sortableItems">
         <thead>
             <tr>
-                <th class="col">Item</th>
+                <th>Item</th>
+                <th>Labels</th>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +20,12 @@
                 @php /** @var $item \App\Entities\Todolists\Item */ @endphp
                 <tr data-id="{{ $item->id }}">
                     <td>{{ $item->name }}</td>
+                    <td>
+                        @foreach($item->labels as $label)
+                            @php /** @var $label \App\Entities\Labels\Label */ @endphp
+                            <span class="badge badge-pull badge-primary">{{ ucfirst($label->name) }}</span>
+                        @endforeach
+                    </td>
                 </tr>
             @endforeach
         </tbody>
@@ -34,6 +41,7 @@
                 <thead>
                 <tr>
                     <th>Item</th>
+                    <th>Labels</th>
                     <th>Zichtbaar vanaf</th>
                 </tr>
                 </thead>
@@ -42,6 +50,12 @@
                         @php /** @var $item \App\Entities\Todolists\Item */ @endphp
                         <tr>
                             <td>{{ $item->name }}</td>
+                            <td>
+                                @foreach($item->labels as $label)
+                                    @php /** @var $label \App\Entities\Labels\Label */ @endphp
+                                    <span class="badge badge-pull badge-primary">{{ ucfirst($label->name) }}</span>
+                                @endforeach
+                            </td>
                             <td>{{ $item->display_after->format('d-m-Y, h:m') }}</td>
                         </tr>
                     @endforeach

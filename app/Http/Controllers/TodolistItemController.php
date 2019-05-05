@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Entities\Todolists\Item;
 use App\Entities\Todolists\TodoList;
 use App\Http\Requests\Todolist\StoreItemRequest;
 use App\Jobs\Todolists\StoreItemJob;

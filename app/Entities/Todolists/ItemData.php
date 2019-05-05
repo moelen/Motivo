@@ -18,4 +18,9 @@ class ItemData
      * @var Carbon
      */
     public $displayAfter;
+
+    /**
+     * @var array
+     */
+    public $labels = [];
 }

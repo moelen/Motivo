@@ -41,6 +41,11 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <label for="labels">Labels</label>
+            <input type="text" name="labels" class="form-control" placeholder="Labels, gescheiden met een comma">
+        </div>
+
         <button class="btn btn-primary">Opslaan</button>
     </form>
 @endsection

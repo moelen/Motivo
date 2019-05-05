@@ -26,11 +26,17 @@ class ItemTransformer extends Transformer
 
         $data->name = $item->input('name');
         $data->displayAfter = $this->getDate($item);
+        $data->labels = $this->getLabels($item);
 
         return $data;
 
     }
 
+    /**
+     * @param Request $request
+     *
+     * @return Carbon|null
+     */
     private function getDate(Request $request): ?Carbon
     {
         if($request->filled('date'))
@@ -42,5 +48,21 @@ class ItemTransformer extends Transformer
         }
 
         return null;
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return array
+     */
+    private function getLabels(Request $request): array
+    {
+        return collect(explode(',', $request->input('labels', [])))->map(function (string $item) {
+            return strtolower(trim($item));
+        })
+            ->reject(function ($item) {
+                return is_null($item) || $item === "";
+            })
+            ->toArray();
     }
 }

@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int      $id
  * @property string   $name
  * @property TodoList $todoList
+ * @property Carbon   $display_after
  * @property Carbon   $created_at
  * @property Carbon   $updated_at
  */
@@ -25,6 +26,17 @@ class Item extends Model
      * @var string
      */
     protected $table = 'todo_list_items';
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'display_after',
+        'created_at',
+        'updated_at',
+    ];
 
     /**
      * @return BelongsTo

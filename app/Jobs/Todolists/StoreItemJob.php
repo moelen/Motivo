@@ -3,16 +3,11 @@
 namespace App\Jobs\Todolists;
 
 use App\Entities\Todolists\Item;
+use App\Entities\Todolists\ItemData;
 use App\Entities\Todolists\TodoList;
-use App\Http\Requests\Todolist\StoreItemRequest;
 
 class StoreItemJob
 {
-
-    /**
-     * @var StoreItemRequest
-     */
-    private $request;
 
     /**
      * @var TodoList
@@ -20,15 +15,20 @@ class StoreItemJob
     private $todoList;
 
     /**
+     * @var ItemData
+     */
+    private $data;
+
+    /**
      * Create a new job instance.
      *
-     * @param StoreItemRequest $request
+     * @param ItemData $data
      * @param TodoList $todoList
      */
-    public function __construct(StoreItemRequest $request, TodoList $todoList)
+    public function __construct(ItemData $data, TodoList $todoList)
     {
-        $this->request = $request;
         $this->todoList = $todoList;
+        $this->data = $data;
     }
 
     /**
@@ -40,8 +40,10 @@ class StoreItemJob
     {
         $item = new Item();
 
-        $item->name = $this->request->input('name');
         $item->todoList()->associate($this->todoList);
+
+        $item->name = $this->data->name;
+        $item->display_after = $this->data->displayAfter;
 
         $item->save();
     }

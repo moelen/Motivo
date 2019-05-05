@@ -19,6 +19,18 @@ class StoreItemRequest extends FormRequest
                 'required',
                 'min:3',
             ],
+            'date' => [
+                'date',
+                'nullable',
+            ],
+            'hour' => [
+                'nullable',
+                'integer',
+            ],
+            'min' => [
+                'nullable',
+                'integer',
+            ]
         ];
     }
 }

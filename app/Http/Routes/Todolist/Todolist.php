@@ -7,17 +7,17 @@ Route::group(['prefix' => 'todolist', 'as' => 'todolist.'], function () {
         'uses' => 'TodolistController@index'
     ]);
 
-    Route::get('/{todoList}', [
-        'as'   => 'show',
-        'uses' => 'TodolistController@show'
-    ]);
-
-    Route::get('create', [
+    Route::get('/create', [
         'as'   => 'create',
         'uses' => 'TodolistController@create'
     ]);
 
-    Route::post('create', [
+    Route::post('/create', [
         'uses' => 'TodolistController@store'
+    ]);
+
+    Route::get('/{todoList}', [
+        'as'   => 'show',
+        'uses' => 'TodolistController@show'
     ]);
 });

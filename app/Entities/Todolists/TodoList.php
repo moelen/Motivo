@@ -6,15 +6,19 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 
 /**
  * Class TodoList
  * @package App\Entities\Todolists
  *
- * @property int    $id
- * @property string $name
- * @property Carbon $created_at
- * @property Carbon $updated_at
+ * @property int               $id
+ * @property string            $name
+ * @property Collection|Item[] $items
+ * @property Collection|Item[] $activeItems
+ * @property Collection|Item[] $snoozedItems
+ * @property Carbon            $created_at
+ * @property Carbon            $updated_at
  */
 class TodoList extends Model
 {

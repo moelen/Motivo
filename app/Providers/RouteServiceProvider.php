@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Entities\Todolists\Item;
 use App\Entities\Todolists\TodoList;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -78,5 +79,6 @@ class RouteServiceProvider extends ServiceProvider
     private function bindModels()
     {
         Route::model('todoList', TodoList::class);
+        Route::model('todoListItem', Item::class);
     }
 }

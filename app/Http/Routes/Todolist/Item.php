@@ -1,13 +1,18 @@
 <?php
 
-Route::group(['prefix' => 'todolist/{todoList}', 'as' => 'todolist.item.'], function () {
+Route::group(['prefix' => 'todolist/{todoList}/item', 'as' => 'todolist.item.'], function () {
 
-   Route::get('create', [
+   Route::get('/create', [
         'as'   => 'create',
         'uses' => 'TodolistItemController@create'
     ]);
 
-    Route::post('create', [
+    Route::post('/create', [
         'uses' => 'TodolistItemController@store'
+    ]);
+
+    Route::post('/order', [
+        'as'   => 'order',
+        'uses' => 'TodolistItemController@updateOrder'
     ]);
 });

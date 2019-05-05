@@ -41,9 +41,17 @@ class TodoList extends Model
     /**
      * @return HasMany
      */
+    public function orderedItems(): HasMany
+    {
+        return $this->hasMany(Item::class)->orderBy('todo_list_items.order', 'ASC');
+    }
+
+    /**
+     * @return HasMany
+     */
     public function activeItems(): HasMany
     {
-       return $this->items()
+       return $this->orderedItems()
                    ->where(function (Builder $query) {
                        $query->orWhereNull('todo_list_items.display_after')
                              ->orWhere('todo_list_items.display_after', '<', Carbon::now()->format('Y-m-d h:m:i'));

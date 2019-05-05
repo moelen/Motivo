@@ -44,6 +44,7 @@ class StoreItemJob
 
         $item->name = $this->data->name;
         $item->display_after = $this->data->displayAfter;
+        $item->order = 0;
 
         $item->save();
     }

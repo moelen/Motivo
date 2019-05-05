@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @property int      $id
  * @property string   $name
+ * @property int      $order
  * @property TodoList $todoList
  * @property Carbon   $display_after
  * @property Carbon   $created_at

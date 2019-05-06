@@ -23,4 +23,9 @@ class ItemData
      * @var array
      */
     public $labels = [];
+
+    /**
+     * @var array
+     */
+    public $files = [];
 }

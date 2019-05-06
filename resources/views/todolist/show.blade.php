@@ -13,6 +13,7 @@
             <tr>
                 <th>Item</th>
                 <th>Labels</th>
+                <th>Bijlagen</th>
             </tr>
         </thead>
         <tbody>
@@ -26,43 +27,58 @@
                             <span class="badge badge-pull badge-primary">{{ ucfirst($label->name) }}</span>
                         @endforeach
                     </td>
+                    <td>
+                        @foreach($item->attachments as $attachment)
+                            @php /** @var $attachment \App\Entities\Attachments\Attachment */ @endphp
+                            <a href="{{ route('attachment.download', ['attachment' => $attachment]) }}">{{ $attachment->name }}</a> <br>
+                        @endforeach
+                    </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
 
-    <a class="btn btn-primary" data-toggle="collapse" href="#snoozedItems" role="button" aria-expanded="false" aria-controls="snoozedItems">
-        Gesnoozede items
-    </a>
+    @if($todolist->snoozedItems()->count() > 0)
+        <a class="btn btn-primary" data-toggle="collapse" href="#snoozedItems" role="button" aria-expanded="false" aria-controls="snoozedItems">
+            Gesnoozede items
+        </a>
 
-    <div class="collapse" id="snoozedItems">
-        <div class="card card-body">
-            <table class="table table-striped table-hover">
-                <thead>
-                <tr>
-                    <th>Item</th>
-                    <th>Labels</th>
-                    <th>Zichtbaar vanaf</th>
-                </tr>
-                </thead>
-                <tbody>
-                    @foreach($todolist->snoozedItems as $item)
-                        @php /** @var $item \App\Entities\Todolists\Item */ @endphp
-                        <tr>
-                            <td>{{ $item->name }}</td>
-                            <td>
-                                @foreach($item->labels as $label)
-                                    @php /** @var $label \App\Entities\Labels\Label */ @endphp
-                                    <span class="badge badge-pull badge-primary">{{ ucfirst($label->name) }}</span>
-                                @endforeach
-                            </td>
-                            <td>{{ $item->display_after->format('d-m-Y, h:m') }}</td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+        <div class="collapse" id="snoozedItems">
+            <div class="card card-body">
+                <table class="table table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Labels</th>
+                        <th>Bijlagen</th>
+                        <th>Zichtbaar vanaf</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($todolist->snoozedItems as $item)
+                            @php /** @var $item \App\Entities\Todolists\Item */ @endphp
+                            <tr>
+                                <td>{{ $item->name }}</td>
+                                <td>
+                                    @foreach($item->labels as $label)
+                                        @php /** @var $label \App\Entities\Labels\Label */ @endphp
+                                        <span class="badge badge-pull badge-primary">{{ ucfirst($label->name) }}</span>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    @foreach($item->attachments as $attachment)
+                                        @php /** @var $attachment \App\Entities\Attachments\Attachment */ @endphp
+                                        <a href="{{ route('attachment.download', ['attachment' => $attachment]) }}">{{ $attachment->name }}</a> <br>
+                                    @endforeach
+                                </td>
+                                <td>{{ $item->display_after->format('d-m-Y, h:m') }}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
+    @endif
 @endsection
 
 @push('js')

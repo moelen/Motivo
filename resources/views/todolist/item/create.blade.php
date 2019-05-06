@@ -46,6 +46,14 @@
             <input type="text" name="labels" class="form-control" placeholder="Labels, gescheiden met een comma">
         </div>
 
+        <div class="form-group">
+            <label for="attachments">Bijlagen</label>
+            <input type="file" multiple="multiple" name="attachments[]" class="form-control-file">
+            <small class="form-text text-muted">
+                Selecteer 1 of meerdere bestanden.
+            </small>
+        </div>
+
         <button class="btn btn-primary">Opslaan</button>
     </form>
 @endsection

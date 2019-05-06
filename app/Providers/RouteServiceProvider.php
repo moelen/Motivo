@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Entities\Attachments\Attachment;
 use App\Entities\Todolists\Item;
 use App\Entities\Todolists\TodoList;
 use Illuminate\Support\Facades\Route;
@@ -80,5 +81,6 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::model('todoList', TodoList::class);
         Route::model('todoListItem', Item::class);
+        Route::model('attachment', Attachment::class);
     }
 }

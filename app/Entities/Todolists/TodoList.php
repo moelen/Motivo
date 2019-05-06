@@ -67,4 +67,16 @@ class TodoList extends Model
             ->whereNotNull('todo_list_items.display_after')
             ->where('todo_list_items.display_after', '>', Carbon::now()->format('Y-m-d h:m:i'));
     }
+
+    /**
+     * @return bool|null
+     *
+     * @throws \Exception
+     */
+    public function delete(): ?bool
+    {
+        $this->items->each->delete();
+
+        return parent::delete();
+    }
 }

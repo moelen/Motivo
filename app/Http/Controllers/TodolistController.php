@@ -24,6 +24,7 @@ class TodolistController extends Controller
 
     /**
      * @param TodoList $todolist
+     *
      * @return View
      */
     public function show(TodoList $todolist): View
@@ -41,11 +42,25 @@ class TodolistController extends Controller
 
     /**
      * @param StoreTodolistRequest $request
+     *
      * @return RedirectResponse
      */
     public function store(StoreTodolistRequest $request): RedirectResponse
     {
         $this->dispatchNow(new StoreTodolistJob($request));
+
+        return redirect()->route('todolist.index');
+    }
+
+    /**
+     * @param TodoList $todolist
+     * @return RedirectResponse
+     *
+     * @throws \Exception
+     */
+    public function destroy(TodoList $todolist): RedirectResponse
+    {
+        $todolist->delete();
 
         return redirect()->route('todolist.index');
     }

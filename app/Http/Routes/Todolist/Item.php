@@ -16,8 +16,17 @@ Route::group(['prefix' => 'todolist/{todoList}/item', 'as' => 'todolist.item.'],
         'uses' => 'TodolistItemController@updateOrder'
     ]);
 
+    Route::get('/{todoListItem}/edit', [
+        'as'   => 'edit',
+        'uses' => 'TodolistItemController@edit'
+    ]);
+
+    Route::post('/{todoListItem}/edit', [
+        'uses' => 'TodolistItemController@update'
+    ]);
+
     Route::get('/{todoListItem}/destroy', [
-        'as' => 'delete',
+        'as'   => 'delete',
         'uses' => 'TodolistItemController@destroy'
     ]);
 });

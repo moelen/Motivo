@@ -35,6 +35,7 @@
                         @endforeach
                     </td>
                     <td>
+                        <a href="{{ route('todolist.item.edit', ['todoList' => $todolist, 'item' => $item]) }}"><i class="fas fa-edit"></i></a>
                         <a href="{{ route('todolist.item.delete', ['todoList' => $todolist, 'item' => $item]) }}"><i class="fas fa-trash-alt"></i></a>
                     </td>
                 </tr>

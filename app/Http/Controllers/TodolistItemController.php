@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Entities\Todolists\Item;
 use App\Entities\Todolists\TodoList;
 use App\Http\Requests\Todolist\StoreItemRequest;
+use App\Http\Requests\Todolist\UpdateItemRequest;
 use App\Jobs\Todolists\StoreItemJob;
+use App\Jobs\Todolists\UpdateItemJob;
 use App\Jobs\Todolists\UpdateItemOrder;
 use App\Transformers\Todolists\ItemTransformer;
 use Illuminate\Http\JsonResponse;
@@ -50,6 +52,34 @@ class TodolistItemController extends Controller
         $this->dispatchNow(new UpdateItemOrder($request));
 
         return response()->json(['success' => 'success']);
+    }
+
+    /**
+     * @param TodoList $todoList
+     * @param Item $item
+     *
+     * @return View
+     */
+    public function edit(TodoList $todoList, Item $item): View
+    {
+        return view('todolist.item.edit', compact('todoList', 'item'));
+    }
+
+    /**
+     * @param UpdateItemRequest $request
+     * @param TodoList $todoList
+     * @param Item $item
+     * @param ItemTransformer $transformer
+     *
+     * @return RedirectResponse
+     */
+    public function update(UpdateItemRequest $request, TodoList $todoList, Item $item, ItemTransformer $transformer): RedirectResponse
+    {
+        $data = $transformer->transform($request);
+
+        $this->dispatchNow(new UpdateItemJob($data, $item));
+
+        return redirect()->route('todolist.show', $todoList);
     }
 
     /**

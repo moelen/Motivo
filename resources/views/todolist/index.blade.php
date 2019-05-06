@@ -9,12 +9,16 @@
         <thead>
             <tr>
                 <th class="col">Naam</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach($todolists as $list)
                 <tr data-link="{{ route('todolist.show', ['todoList' => $list ]) }}">
                     <td>{{ $list->name }}</td>
+                    <td>
+                        <a href="{{ route('todolist.delete', ['todoList' => $list]) }}"><i class="fas fa-trash-alt"></i></a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>

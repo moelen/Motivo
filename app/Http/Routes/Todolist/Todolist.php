@@ -20,4 +20,9 @@ Route::group(['prefix' => 'todolist', 'as' => 'todolist.'], function () {
         'as'   => 'show',
         'uses' => 'TodolistController@show'
     ]);
+
+    Route::get('/{todoList}/destroy', [
+        'as'   => 'delete',
+        'uses' => 'TodolistController@destroy'
+    ]);
 });

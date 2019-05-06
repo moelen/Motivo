@@ -9,18 +9,20 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 
 /**
  * Class TodoList
  * @package App\Entities\Todolists
  *
- * @property int      $id
- * @property string   $name
- * @property int      $order
- * @property TodoList $todoList
- * @property Carbon   $display_after
- * @property Carbon   $created_at
- * @property Carbon   $updated_at
+ * @property int                     $id
+ * @property string                  $name
+ * @property int                     $order
+ * @property TodoList                $todoList
+ * @property Collection|Attachment[] $attachments
+ * @property Carbon                  $display_after
+ * @property Carbon                  $created_at
+ * @property Carbon                  $updated_at
  */
 class Item extends Model
 {
@@ -65,5 +67,17 @@ class Item extends Model
     public function attachments(): HasMany
     {
         return $this->hasMany(Attachment::class);
+    }
+
+    /**
+     * @return bool|null
+     *
+     * @throws \Exception
+     */
+    public function delete(): ?bool
+    {
+        $this->attachments->each->delete();
+
+        return parent::delete();
     }
 }

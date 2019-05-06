@@ -14,6 +14,7 @@
                 <th>Item</th>
                 <th>Labels</th>
                 <th>Bijlagen</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -32,6 +33,9 @@
                             @php /** @var $attachment \App\Entities\Attachments\Attachment */ @endphp
                             <a href="{{ route('attachment.download', ['attachment' => $attachment]) }}">{{ $attachment->name }}</a> <br>
                         @endforeach
+                    </td>
+                    <td>
+                        <a href="{{ route('todolist.item.delete', ['todoList' => $todolist, 'item' => $item]) }}"><i class="fas fa-trash-alt"></i></a>
                     </td>
                 </tr>
             @endforeach

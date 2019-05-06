@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Todolists\Item;
 use App\Entities\Todolists\TodoList;
 use App\Http\Requests\Todolist\StoreItemRequest;
 use App\Jobs\Todolists\StoreItemJob;
@@ -49,5 +50,20 @@ class TodolistItemController extends Controller
         $this->dispatchNow(new UpdateItemOrder($request));
 
         return response()->json(['success' => 'success']);
+    }
+
+    /**
+     * @param TodoList $todoList
+     * @param Item $item
+     *
+     * @return RedirectResponse
+     *
+     * @throws \Exception
+     */
+    public function destroy(TodoList $todoList, Item $item): RedirectResponse
+    {
+        $item->delete();
+
+        return redirect()->route('todolist.show', $todoList);
     }
 }

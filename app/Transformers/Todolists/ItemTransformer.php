@@ -27,6 +27,7 @@ class ItemTransformer extends Transformer
         $data->name = $item->input('name');
         $data->displayAfter = $this->getDate($item);
         $data->labels = $this->getLabels($item);
+        $data->files = $item->attachments ?? [];
 
         return $data;
 

@@ -2,11 +2,13 @@
 
 namespace App\Entities\Todolists;
 
+use App\Entities\Attachments\Attachment;
 use App\Entities\Labels\Label;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class TodoList
@@ -55,5 +57,13 @@ class Item extends Model
     public function labels(): BelongsToMany
     {
         return $this->belongsToMany(Label::class, 'label_todo_list_item','todo_list_item_id','label_id');
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function attachments(): HasMany
+    {
+        return $this->hasMany(Attachment::class);
     }
 }

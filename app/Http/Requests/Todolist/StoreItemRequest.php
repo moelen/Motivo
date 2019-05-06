@@ -30,6 +30,13 @@ class StoreItemRequest extends FormRequest
             'min' => [
                 'nullable',
                 'integer',
+            ],
+            'attachments' => [
+                'nullable',
+                'array',
+            ],
+            'attachments.*' => [
+                'file',
             ]
         ];
     }

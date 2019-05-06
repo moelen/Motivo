@@ -2,10 +2,12 @@
 
 namespace App\Jobs\Todolists;
 
+use App\Entities\Attachments\Attachment;
 use App\Entities\Labels\Label;
 use App\Entities\Todolists\Item;
 use App\Entities\Todolists\ItemData;
 use App\Entities\Todolists\TodoList;
+use Illuminate\Http\UploadedFile;
 
 class StoreItemJob
 {
@@ -50,6 +52,7 @@ class StoreItemJob
         $item->save();
 
         $this->attachLabels($item);
+        $this->storeAttachments($item);
     }
 
     /**
@@ -75,5 +78,27 @@ class StoreItemJob
     private function getLabel(string $name): Label
     {
         return Label::firstOrCreate(['name' => $name]);
+    }
+
+    /**
+     * @param Item $item
+     */
+    private function storeAttachments(Item $item): void
+    {
+        /** @var $file UploadedFile */
+        foreach($this->data->files as $file)
+        {
+            $dir = 'attachments';
+            $fileName = $item->id . "_" . $file->hashName();
+
+            $file->storeAs($dir, $fileName);
+
+            $attachment = new Attachment();
+            $attachment->item()->associate($item);
+            $attachment->name = $file->getClientOriginalName();
+            $attachment->path = $dir . DIRECTORY_SEPARATOR . $fileName;
+
+            $attachment->save();
+        }
     }
 }

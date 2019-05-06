@@ -44,4 +44,16 @@ class Attachment extends Model
     {
         return storage_path('app' . DIRECTORY_SEPARATOR . $this->path);
     }
+
+    /**
+     * @return bool|null
+     *
+     * @throws \Exception
+     */
+    public function delete(): ?bool
+    {
+        unlink($this->fullPath);
+
+        return parent::delete();
+    }
 }
